@@ -53,7 +53,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'mxw/vim-jsx'
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
