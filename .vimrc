@@ -2,7 +2,7 @@
 " ======================================
 " Vimrc for Web Developers
 " author: walnutzhang  https://github.com/walnutzhang
-" version: 1.0, 2016-10-09
+" version: 1.1, 2016-10-20
 " =======================================
 
 
@@ -24,6 +24,7 @@ set number
 set tabstop=2
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set hidden
+set cursorline
 set clipboard=unnamed   " enable copy text from vim to other software in OS X
 filetype plugin indent on
 syntax on
@@ -39,6 +40,13 @@ autocmd BufReadPost *
 
 
 " ======================================
+" Custom Keymaps 
+" ======================================
+
+:imap jj <Esc>
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>.
+
+" ======================================
 " Plugin Management Powered by vim-plug 
 " ======================================
 
@@ -47,15 +55,22 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'mxw/vim-jsx'
-" Plug 'wakatime/vim-wakatime'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
+
+" Ack and Ag
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Emmet 
 let g:user_emmet_leader_key='<C-E>'
@@ -65,12 +80,31 @@ let g:user_emmet_mode='a'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules)|(\.(swp|ico|git|svn))$'
 
 " airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamecollapse = 0
+" User \1 to select buffer with index number 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 map <C-c> :NERDTreeFind<CR>
 let NERDTreeAutoDeleteBuffer=1
+let NERDTreeShowHidden=1
